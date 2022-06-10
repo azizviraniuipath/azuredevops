@@ -19,11 +19,15 @@ steps:
     projectJsonPath: '$(Build.SourcesDirectory)'
     orchestratorConnection: 'UiPathConnection'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-    traceLevel: 'Information'
+  env:
+    OrchestratorClientIdOverride: '$(ClientId)'
+    OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
 
 - task: UiPathTest@2
   inputs:
     testTarget: 'TestProject'
     orchestratorConnection: 'UiPathConnection'
     folderName: '$(FolderName)'
-    traceLevel: 'Information'
+  env:
+    OrchestratorClientIdOverride: '$(ClientId)'
+    OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
