@@ -23,11 +23,12 @@ steps:
     OrchestratorClientIdOverride: '$(ClientId)'
     OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
 
-- task: UiPathTest@2
+- task: UiPathDeploy@2
   inputs:
-    testTarget: 'TestProject'
     orchestratorConnection: 'UiPathConnection'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
     folderName: '$(FolderName)'
+    entryPoints: 'Main.xaml'
   env:
     OrchestratorClientIdOverride: '$(ClientId)'
     OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
