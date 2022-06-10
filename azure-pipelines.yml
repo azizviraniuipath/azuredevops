@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+ - group: Variables
+
+steps:
+- task: UiPathPack@2
+  inputs:
+    versionType: 'AutoVersion'
+    projectJsonPath: '$(Build.SourcesDirectory)'
+    orchestratorConnection: 'UiPathConnection'
+    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+    runWorkflowAnalysis: true
+    traceLevel: 'Information'
+  env:
+    OrchestratorClientIdOverride: '$(ClientId)'
+    OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
+- task: UiPathTest@2
+  inputs:
+    testTarget: 'TestProject'
+    orchestratorConnection: 'UiPathConnection'
+    folderName: '$(FolderName)'
+    traceLevel: 'Information'
+  env:
+    OrchestratorClientIdOverride: '$(ClientId)'
+    OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
