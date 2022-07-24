@@ -33,12 +33,4 @@ steps:
     OrchestratorClientIdOverride: '$(ClientId)'
     OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
 
-
-    - task: UiPathTest@2
-      inputs:
-        testTarget: 'TestSet'
-        orchestratorConnection: 'UiPathConnection'
-        folderName: '$(FolderName)'
-    env:
-       OrchestratorClientIdOverride: '$(ClientId)'
-       OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
+  
